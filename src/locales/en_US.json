@@ -1,0 +1,17 @@
+{
+   "common": {
+      "cancel": "Cancel",
+      "home": "Home",
+      "name": "Name",
+      "profile": "Profile",
+      "save": "Save"
+   },
+   "message": {
+   },
+   "system": {
+      "appName": "hs-vue Explorer",
+      "appAbbrev": "hs-vue Explorer"
+   },
+   "validation": {
+   }
+}
