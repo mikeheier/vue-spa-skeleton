@@ -72,7 +72,7 @@ export function defineConfig(options) {
       };
    }
 
-
+   addEnvVar('div_id', options?.appDivId ?? 'app');
    addEnvVar('title', options?.appTitle ?? 'vue-spa-skeleton');
    addEnvVar('buildVersion', options?.buildVersion);
 
