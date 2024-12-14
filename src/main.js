@@ -1,5 +1,5 @@
+import '@hs-vue/style';
 import '@/style/index.scss';
-import '@/environment.js';
 import { createApp } from 'vue';
 import App from '@/App.vue';
 import plugins from '@/plugins/_index.js';

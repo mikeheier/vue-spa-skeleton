@@ -54,7 +54,10 @@ export default defineConfig({
    // },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@style': fileURLToPath(new URL('./src/style', import.meta.url)),
+      '@hs-js': '@mikeheier/hs-js',
+      '@hs-vue': '@mikeheier/hs-vue'
     }
   },
    css: {
@@ -70,6 +73,7 @@ export default defineConfig({
              * main.js for the core explorer styles
              */
             additionalData: `
+               @import '@hs-vue/sass/include';
             `
          }
       },

@@ -1,6 +1,6 @@
 // import SelfService from '@/services/SelfService.js';
 // import { useUserStore } from '@/stores/userStore';
-import { updatePreferences } from '@/utils/Formatter.js';
+// import { updatePreferences } from '@/utils/Formatter.js';
 
 /**
  * Install
@@ -10,8 +10,8 @@ export default function (app, options) {
    const $auth = globals.$auth;
 
    $auth.getFromUri = (...args) => {
-      const redirectPath = sessionStorage.getItem('iot-cp-rdp');
-      sessionStorage.removeItem('iot-cp-rdp');
+      const redirectPath = sessionStorage.getItem('__scp__-rdp');
+      sessionStorage.removeItem('__scp__-rdp');
 
       return redirectPath ?? globals.$routeUtil.getPath('home');
    };
@@ -24,26 +24,35 @@ export default function (app, options) {
       const authenticated = await $auth.isAuthenticated();
       const isAuthView = to.meta.requiresAuth;
 
+      console.log('>>>>>>>>>>>>> isAuthView', isAuthView);
+      console.log('>>>>>>>>>>>>> $sm.getLoggedInUser()', $sm.getLoggedInUser());
+
       // is the user logged in?
       if (isAuthView && !authenticated) {
-         sessionStorage.setItem('iot-cp-rdp', to.path);
+         sessionStorage.setItem('__scp__-rdp', to.path);
          $auth.signInWithRedirect();
 
          return false;
       }
       // is the user info loaded?
-      else if (isAuthView && !$sm.getLoggedInUserEmployeeId()) {
+      else if (isAuthView && !$sm.getLoggedInUser()) {
          const user = await $auth.getUser();
 
          // const iotCpUser = await SelfService.me(user.id);
-         const iotCpUser = user; // temp
+         // const iotCpUser = user; // temp
 
-         $sm.loadUser(user, iotCpUser, await $auth.authStateManager.updateAuthState());
-         updatePreferences(await globals.$pm.getCorePrefs());
+         $sm.loadUser(user);
+         // $sm.loadUser(user, iotCpUser, await $auth.authStateManager.updateAuthState());
+         // updatePreferences(await globals.$pm.getCorePrefs());
 
          // update store after updating session manager.  this way, the header will have all the info needed to render the links properly
          // on load.
          // userStore.update(user);
+      }
+
+      if (authenticated && to.name === 'login') {
+         console.log('>>>>>>>>>> already logged in, log out first.', authenticated);
+         return '/dashboard';
       }
 
       // does the destination require specific permissions

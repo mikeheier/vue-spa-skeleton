@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import middleware from '@/middleware/_index.js';
 import routes from '@/routes/_index.js';
-// import { initRouteUtil } from '@oti/fcc-vue3/util/routeutil';
+import { initRouteUtil } from '@hs-vue/util/route-util';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,7 +12,7 @@ export default {
   install(app, options) {
     app.use(router);
 
-    // initRouteUtil({ router });
+    initRouteUtil({ router });
 
     // register each middleware with the router
     middleware(app, options)

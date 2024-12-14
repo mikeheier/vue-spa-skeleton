@@ -17,6 +17,8 @@ const appvar = (name, isJson) => {
 export const isDevMode = penv.MODE === 'development';
 export const routerBase = appvar('base_url');
 export const fixtureOptions = appvar('fixture_options', true);
+export const divId = appvar('div_id');
+export const appTitle = appvar('title');
 // buildVersion passed via jenkins will be formated yyyyMMddHHmmss_<build number>, we'll replace the '_' with '.'
 export const buildNumber = (appvar('buildVersion') || `${isDevMode ? 'DEV-' : 'v'}${new Date().getTime()}`).replace(/_/g, '.');
 

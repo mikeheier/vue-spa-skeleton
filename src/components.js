@@ -2,9 +2,10 @@
  * Register global components here
  *
  */
+import AppLogo from '@/components/logo/AppLogo.vue';
 
 export default {
    install(vue, options) {
-      // vue.component('newComponent', newComponent);
+      vue.component('AppLogo', AppLogo);
    }
 };

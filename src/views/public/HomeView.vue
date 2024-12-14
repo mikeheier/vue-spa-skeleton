@@ -1,5 +1,8 @@
 <template>
-   <home />
+   <hs-view
+      view-title="Home">
+      <home />
+   </hs-view>
 </template>
 
 <script setup>
